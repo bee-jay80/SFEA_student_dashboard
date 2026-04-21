@@ -1,0 +1,295 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Register - Sound Foundation Edtech Academy{% endblock %}
+
+{% block extra_css %}
+<style>
+  .auth-wrapper {
+    min-height: calc(100vh - 70px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    padding: 20px;
+  }
+
+  .auth-container {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    padding: 40px;
+    max-width: 450px;
+    width: 100%;
+  }
+
+  .auth-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .auth-header h2 {
+    color: var(--primary-dark-orange);
+    margin-bottom: 10px;
+    font-size: 1.8rem;
+  }
+
+  .auth-header p {
+    color: #666;
+    margin: 0;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-dark);
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    font-family: inherit;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus {
+    outline: none;
+    border-color: var(--primary-dark-orange);
+    box-shadow: 0 0 0 3px rgba(210, 105, 30, 0.1);
+  }
+
+  .form-group input::placeholder {
+    color: #999;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+  }
+
+  .form-row .form-group {
+    margin-bottom: 0;
+  }
+
+  .submit-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--primary-dark-orange);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+  }
+
+  .submit-btn:hover {
+    background-color: var(--primary-orange);
+    box-shadow: 0 4px 12px rgba(210, 105, 30, 0.3);
+  }
+
+  .auth-footer {
+    text-align: center;
+    margin-top: 20px;
+    color: #666;
+  }
+
+  .auth-footer a {
+    color: var(--primary-dark-orange);
+    font-weight: 600;
+  }
+
+  .auth-footer a:hover {
+    color: var(--primary-orange);
+  }
+
+  .error-messages,
+  .success-messages,
+  .info-messages {
+    list-style: none;
+    margin-bottom: 20px;
+    padding: 0;
+  }
+
+  .error-messages li {
+    background-color: #ffebee;
+    color: #c62828;
+    padding: 10px 12px;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    border-left: 4px solid #c62828;
+  }
+
+  .success-messages li {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    padding: 10px 12px;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    border-left: 4px solid #2e7d32;
+  }
+
+  .info-messages li {
+    background-color: #e3f2fd;
+    color: #1976d2;
+    padding: 10px 12px;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    border-left: 4px solid #1976d2;
+  }
+
+  @media (max-width: 480px) {
+    .auth-container {
+      padding: 25px;
+    }
+
+    .auth-header h2 {
+      font-size: 1.5rem;
+    }
+
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="auth-wrapper">
+  <div class="auth-container">
+    <div class="auth-header">
+      <h2>Create Account</h2>
+      <p>Join SFEA and start learning today</p>
+    </div>
+
+    <!-- Display Messages -->
+    {% if messages %}
+      <ul class="
+        {% if 'error' in messages.0.tags %}
+          error-messages
+        {% elif 'success' in messages.0.tags %}
+          success-messages
+        {% else %}
+          info-messages
+        {% endif %}
+      ">
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    <form method="POST" novalidate>
+      {% csrf_token %}
+
+      <!-- Email -->
+      <div class="form-group">
+        <label for="{{ form.email.id_for_label }}">Email Address *</label>
+        {{ form.email }}
+        {% if form.email.errors %}
+          <span style="color: #c62828; font-size: 0.85rem; display: block; margin-top: 5px;">
+            {{ form.email.errors.0 }}
+          </span>
+        {% endif %}
+      </div>
+
+      <!-- First Name & Last Name -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="{{ form.first_name.id_for_label }}">First Name</label>
+          {{ form.first_name }}
+          {% if form.first_name.errors %}
+            <span style="color: #c62828; font-size: 0.85rem; display: block; margin-top: 5px;">
+              {{ form.first_name.errors.0 }}
+            </span>
+          {% endif %}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.last_name.id_for_label }}">Last Name</label>
+          {{ form.last_name }}
+          {% if form.last_name.errors %}
+            <span style="color: #c62828; font-size: 0.85rem; display: block; margin-top: 5px;">
+              {{ form.last_name.errors.0 }}
+            </span>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Phone Number & Student Reg No -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="{{ form.phone_number.id_for_label }}">Phone Number</label>
+          {{ form.phone_number }}
+          {% if form.phone_number.errors %}
+            <span style="color: #c62828; font-size: 0.85rem; display: block; margin-top: 5px;">
+              {{ form.phone_number.errors.0 }}
+            </span>
+          {% endif %}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.student_reg_no.id_for_label }}">Student Reg No *</label>
+          {{ form.student_reg_no }}
+          {% if form.student_reg_no.errors %}
+            <span style="color: #c62828; font-size: 0.85rem; display: block; margin-top: 5px;">
+              {{ form.student_reg_no.errors.0 }}
+            </span>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Role -->
+      <div class="form-group">
+        <label for="{{ form.role.id_for_label }}">Role *</label>
+        {{ form.role }}
+        {% if form.role.errors %}
+          <span style="color: #c62828; font-size: 0.85rem; display: block; margin-top: 5px;">
+            {{ form.role.errors.0 }}
+          </span>
+        {% endif %}
+      </div>
+
+      <!-- Password -->
+      <div class="form-group">
+        <label for="{{ form.password.id_for_label }}">Password *</label>
+        {{ form.password }}
+        {% if form.password.errors %}
+          <span style="color: #c62828; font-size: 0.85rem; display: block; margin-top: 5px;">
+            {{ form.password.errors.0 }}
+          </span>
+        {% endif %}
+      </div>
+
+      <!-- Password Requirements -->
+      <div style="background-color: #f5f5f5; padding: 12px; border-radius: 5px; margin-bottom: 20px; font-size: 0.85rem; color: #666;">
+        <strong>Password Requirements:</strong>
+        <ul style="margin: 8px 0 0 20px;">
+          <li>At least 8 characters long</li>
+          <li>Contains uppercase and lowercase letters</li>
+          <li>Contains at least one number</li>
+        </ul>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="submit-btn">Create Account</button>
+    </form>
+
+    <div class="auth-footer">
+      Already have an account? <a href="{% url 'login' %}">Sign In</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

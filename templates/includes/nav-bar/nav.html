@@ -1,0 +1,101 @@
+{% load static %}
+<nav class="navbar">
+  <div class="navbar-container">
+    <!-- Logo -->
+    <a href="{% url 'home' %}" class="navbar-logo">
+      <img src="{% static 'assets/logo.svg' %}" alt="Sound Foundation Edtech Academy Logo">
+      <div>
+        <div class="navbar-logo-text">SFEA</div>
+        <small>Sound Foundation</small>
+      </div>
+    </a>
+
+    <!-- Menu -->
+    <ul class="navbar-menu" id="navbarMenu">
+      <li class="navbar-item">
+        <a href="{% url 'home' %}" class="navbar-link">Home</a>
+      </li>
+
+      <!-- Courses Dropdown -->
+      <li class="navbar-item dropdown">
+        <a href="#" class="navbar-link">
+          Courses
+          <span>▼</span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="#" class="dropdown-item">🌐 Web Development</a></li>
+          <li><a href="#" class="dropdown-item">🎨 Web Design (UI/UX)</a></li>
+          <li><a href="#" class="dropdown-item">📊 Data Analysis</a></li>
+          <li><a href="#" class="dropdown-item">🤖 AI & Machine Learning</a></li>
+          <li><a href="#" class="dropdown-item">📱 Digital Marketing</a></li>
+          <li><a href="#" class="dropdown-item">⚙️ Other Courses</a></li>
+        </ul>
+      </li>
+
+      <li class="navbar-item">
+        <a href="#" class="navbar-link">About</a>
+      </li>
+
+      <li class="navbar-item">
+        <a href="#" class="navbar-link">Instructors</a>
+      </li>
+
+      <li class="navbar-item">
+        <a href="#" class="navbar-link">Contact</a>
+      </li>
+    </ul>
+
+    <!-- Right side buttons -->
+    <div class="navbar-right">
+      {% if user.is_authenticated %}
+        <!-- Logged In Menu -->
+        <div class="dropdown" style="position: relative;">
+          <button class="navbar-btn btn-secondary" style="margin: 0; border: none; background: transparent; color: var(--primary-dark-orange); cursor: pointer; display: flex; align-items: center; gap: 5px;">
+            👤 {{ user.email|truncatechars:20 }} <span>▼</span>
+          </button>
+          <ul class="dropdown-menu" style="min-width: 200px; right: 0; left: auto;">
+            <li><a href="{% url 'profile' %}" class="dropdown-item">👤 My Profile</a></li>
+            <li><a href="#" class="dropdown-item">📚 My Courses</a></li>
+            <li><a href="#" class="dropdown-item">📊 Dashboard</a></li>
+            <li style="border-top: 1px solid rgba(210, 105, 30, 0.3); padding-top: 8px; margin-top: 8px;">
+              <a href="{% url 'logout' %}" class="dropdown-item" style="color: #f44336;">🚪 Sign Out</a>
+            </li>
+          </ul>
+        </div>
+      {% else %}
+        <!-- Logged Out Menu -->
+        <a href="{% url 'login' %}" class="navbar-btn btn-secondary">Sign In</a>
+        <a href="{% url 'register' %}" class="navbar-btn btn-primary">Get Started</a>
+      {% endif %}
+    </div>
+
+    <!-- Hamburger Menu -->
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // Mobile menu toggle
+  const hamburger = document.getElementById('hamburger');
+  const navbarMenu = document.getElementById('navbarMenu');
+
+  if (hamburger) {
+    hamburger.addEventListener('click', function() {
+      navbarMenu.classList.toggle('active');
+      this.classList.toggle('active');
+    });
+
+    // Close menu when a link is clicked
+    const navLinks = navbarMenu.querySelectorAll('.navbar-link, .dropdown-item');
+    navLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        navbarMenu.classList.remove('active');
+        hamburger.classList.remove('active');
+      });
+    });
+  }
+</script>

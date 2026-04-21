@@ -1,0 +1,53 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+env/
+ENV/
+
+# Environment files
+.env
+.env.*
+
+# Python build / packaging
+build/
+dist/
+*.egg-info/
+pip-wheel-metadata/
+
+# Django stuff:
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+local_settings.py
+db.sqlite3
+
+# Static and media
+staticfiles/
+media/
+
+# VSCode / JetBrains
+.vscode/
+.idea/
+
+# Test and coverage
+.coverage
+.pytest_cache/
+.tox/
+mypy_cache/
+
+# macOS
+.DS_Store
+
+# Node
+node_modules/
+

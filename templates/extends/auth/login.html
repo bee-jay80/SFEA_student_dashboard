@@ -1,0 +1,266 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Sign In - Sound Foundation Edtech Academy{% endblock %}
+
+{% block extra_css %}
+<style>
+  .auth-wrapper {
+    min-height: calc(100vh - 70px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    padding: 20px;
+  }
+
+  .auth-container {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    padding: 40px;
+    max-width: 400px;
+    width: 100%;
+  }
+
+  .auth-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .auth-header h2 {
+    color: var(--primary-dark-orange);
+    margin-bottom: 10px;
+    font-size: 1.8rem;
+  }
+
+  .auth-header p {
+    color: #666;
+    margin: 0;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-dark);
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+
+  .form-group input:focus {
+    outline: none;
+    border-color: var(--primary-dark-orange);
+    box-shadow: 0 0 0 3px rgba(210, 105, 30, 0.1);
+  }
+
+  .form-group input::placeholder {
+    color: #999;
+  }
+
+  .forgot-password {
+    text-align: right;
+    margin-bottom: 20px;
+  }
+
+  .forgot-password a {
+    color: var(--primary-dark-orange);
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .forgot-password a:hover {
+    color: var(--primary-orange);
+  }
+
+  .submit-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--primary-dark-orange);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .submit-btn:hover {
+    background-color: var(--primary-orange);
+    box-shadow: 0 4px 12px rgba(210, 105, 30, 0.3);
+  }
+
+  .auth-footer {
+    text-align: center;
+    margin-top: 20px;
+    color: #666;
+  }
+
+  .auth-footer a {
+    color: var(--primary-dark-orange);
+    font-weight: 600;
+  }
+
+  .auth-footer a:hover {
+    color: var(--primary-orange);
+  }
+
+  .error-messages,
+  .success-messages,
+  .info-messages {
+    list-style: none;
+    margin-bottom: 20px;
+    padding: 0;
+  }
+
+  .error-messages li {
+    background-color: #ffebee;
+    color: #c62828;
+    padding: 10px 12px;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    border-left: 4px solid #c62828;
+  }
+
+  .success-messages li {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    padding: 10px 12px;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    border-left: 4px solid #2e7d32;
+  }
+
+  .info-messages li {
+    background-color: #e3f2fd;
+    color: #1976d2;
+    padding: 10px 12px;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    border-left: 4px solid #1976d2;
+  }
+
+  .divider {
+    text-align: center;
+    margin: 25px 0;
+    color: #999;
+    position: relative;
+  }
+
+  .divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: #e0e0e0;
+    z-index: 1;
+  }
+
+  .divider span {
+    background-color: white;
+    padding: 0 10px;
+    position: relative;
+    z-index: 2;
+  }
+
+  @media (max-width: 480px) {
+    .auth-container {
+      padding: 25px;
+    }
+
+    .auth-header h2 {
+      font-size: 1.5rem;
+    }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="auth-wrapper">
+  <div class="auth-container">
+    <div class="auth-header">
+      <h2>Welcome Back</h2>
+      <p>Sign in to your SFEA account</p>
+    </div>
+
+    <!-- Display Messages -->
+    {% if messages %}
+      <ul class="
+        {% if 'error' in messages.0.tags %}
+          error-messages
+        {% elif 'success' in messages.0.tags %}
+          success-messages
+        {% else %}
+          info-messages
+        {% endif %}
+      ">
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    <form method="POST" novalidate>
+      {% csrf_token %}
+
+      <!-- Email -->
+      <div class="form-group">
+        <label for="email">Email Address *</label>
+        <input 
+          type="email" 
+          id="email"
+          name="email" 
+          placeholder="Enter your email"
+          required
+        >
+      </div>
+
+      <!-- Password -->
+      <div class="form-group">
+        <label for="password">Password *</label>
+        <input 
+          type="password" 
+          id="password"
+          name="password" 
+          placeholder="Enter your password"
+          required
+        >
+      </div>
+
+      <div class="forgot-password">
+        <a href="#">Forgot password?</a>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="submit-btn">Sign In</button>
+    </form>
+
+    <div class="divider">
+      <span>Don't have an account?</span>
+    </div>
+
+    <div class="auth-footer">
+      <a href="{% url 'register' %}" style="display: block; padding: 10px; background-color: #f5f5f5; border-radius: 5px; text-align: center;">Create Account</a>
+    </div>
+
+    <div style="text-align: center; margin-top: 20px; color: #999; font-size: 0.85rem;">
+      <p>By signing in, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></p>
+    </div>
+  </div>
+</div>
+{% endblock %}

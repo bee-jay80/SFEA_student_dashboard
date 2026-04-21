@@ -1,0 +1,426 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home - Sound Foundation Edtech Academy{% endblock %}
+
+{% block extra_css %}
+<style>
+  /* Hero Section */
+  .hero {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    color: var(--text-light);
+    padding: 80px 20px;
+    text-align: center;
+    border-bottom: 5px solid var(--primary-dark-orange);
+  }
+
+  .hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .hero h1 {
+    color: var(--primary-orange);
+    margin-bottom: 20px;
+    font-size: 3rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  .hero p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: #ddd;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* Courses Section */
+  .courses-section {
+    padding: 60px 20px;
+    background-color: white;
+  }
+
+  .section-title {
+    text-align: center;
+    margin-bottom: 50px;
+    color: var(--primary-black);
+  }
+
+  .section-title h2 {
+    color: var(--primary-dark-orange);
+    margin-bottom: 10px;
+  }
+
+  .section-title p {
+    color: #666;
+    font-size: 1.1rem;
+  }
+
+  .courses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .course-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .course-card:hover {
+    border-color: var(--primary-dark-orange);
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(210, 105, 30, 0.2);
+  }
+
+  .course-icon {
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+  }
+
+  .course-card h3 {
+    color: var(--primary-dark-orange);
+    margin-bottom: 15px;
+  }
+
+  .course-card p {
+    color: #666;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+  }
+
+  /* Features Section */
+  .features-section {
+    background: linear-gradient(135deg, #1a1a1a 0%, #6b4423 100%);
+    color: var(--text-light);
+    padding: 60px 20px;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .feature-item {
+    display: flex;
+    gap: 15px;
+  }
+
+  .feature-icon {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+  }
+
+  .feature-item h3 {
+    color: var(--primary-orange);
+    margin-bottom: 10px;
+  }
+
+  .feature-item p {
+    color: #ddd;
+    margin: 0;
+  }
+
+  /* Statistics Section */
+  .stats-section {
+    padding: 60px 20px;
+    background-color: white;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .stat-item h2 {
+    color: var(--primary-dark-orange);
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+  }
+
+  .stat-item p {
+    color: #666;
+    margin: 0;
+  }
+
+  /* CTA Section */
+  .cta-section {
+    background: linear-gradient(135deg, var(--primary-dark-orange) 0%, var(--primary-orange) 100%);
+    color: var(--text-light);
+    padding: 60px 20px;
+    text-align: center;
+  }
+
+  .cta-section h2 {
+    color: var(--text-light);
+    margin-bottom: 20px;
+  }
+
+  .cta-section p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero h1 {
+      font-size: 2rem;
+    }
+
+    .hero p {
+      font-size: 1rem;
+    }
+
+    .hero-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hero-buttons .btn {
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .courses-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>Welcome to Sound Foundation Edtech Academy</h1>
+    <p>Master the skills of tomorrow with our comprehensive tech education programs. From Web Development to AI & Machine Learning, we've got you covered.</p>
+    <div class="hero-buttons">
+      <button class="btn btn-lg btn-orange">Explore Courses</button>
+      <button class="btn btn-lg btn-outline-orange" style="color: var(--text-light); border-color: var(--text-light);">Learn More</button>
+    </div>
+  </div>
+</section>
+
+<!-- Courses Section -->
+<section class="courses-section">
+  <div class="section-title">
+    <h2>Our Course Offerings</h2>
+    <p>Choose from our diverse range of tech courses designed by industry experts</p>
+  </div>
+  
+  <div class="courses-grid">
+    <!-- Web Development -->
+    <div class="course-card">
+      <div class="course-icon">🌐</div>
+      <h3>Web Development</h3>
+      <p>Learn to build responsive, dynamic web applications using modern technologies and best practices.</p>
+      <button class="btn btn-orange">Learn More</button>
+    </div>
+
+    <!-- Web Design -->
+    <div class="course-card">
+      <div class="course-icon">🎨</div>
+      <h3>Web Design (UI/UX)</h3>
+      <p>Master user-centered design principles and create stunning, intuitive digital experiences.</p>
+      <button class="btn btn-orange">Learn More</button>
+    </div>
+
+    <!-- Data Analysis -->
+    <div class="course-card">
+      <div class="course-icon">📊</div>
+      <h3>Data Analysis</h3>
+      <p>Transform raw data into actionable insights using industry-standard tools and techniques.</p>
+      <button class="btn btn-orange">Learn More</button>
+    </div>
+
+    <!-- AI & ML -->
+    <div class="course-card">
+      <div class="course-icon">🤖</div>
+      <h3>AI & Machine Learning</h3>
+      <p>Dive into the future of technology and build intelligent systems with AI and ML algorithms.</p>
+      <button class="btn btn-orange">Learn More</button>
+    </div>
+
+    <!-- Digital Marketing -->
+    <div class="course-card">
+      <div class="course-icon">📱</div>
+      <h3>Digital Marketing</h3>
+      <p>Boost your brand presence and master strategies for reaching audiences in the digital age.</p>
+      <button class="btn btn-orange">Learn More</button>
+    </div>
+
+    <!-- More Courses -->
+    <div class="course-card">
+      <div class="course-icon">⚙️</div>
+      <h3>Other Tech Courses</h3>
+      <p>Explore additional specialized courses tailored to your interests and career goals.</p>
+      <button class="btn btn-orange">View All</button>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="features-section">
+  <div class="container">
+    <h2 style="text-align: center; margin-bottom: 50px; color: var(--primary-orange);">Why Choose Us?</h2>
+    <div class="features-grid">
+      <div class="feature-item">
+        <div class="feature-icon">👨‍🏫</div>
+        <div>
+          <h3>Expert Instructors</h3>
+          <p>Learn from industry professionals with years of real-world experience.</p>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <div class="feature-icon">📚</div>
+        <div>
+          <h3>Comprehensive Curriculum</h3>
+          <p>Up-to-date content covering the latest technologies and best practices.</p>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <div class="feature-icon">🏆</div>
+        <div>
+          <h3>Certifications</h3>
+          <p>Earn recognized certifications that boost your professional credentials.</p>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <div class="feature-icon">💼</div>
+        <div>
+          <h3>Career Support</h3>
+          <p>Get guidance and support for landing your dream tech job.</p>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <div class="feature-icon">🌍</div>
+        <div>
+          <h3>Global Community</h3>
+          <p>Connect with learners and professionals from around the world.</p>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <div class="feature-icon">⚡</div>
+        <div>
+          <h3>Flexible Learning</h3>
+          <p>Learn at your own pace with flexible schedules that fit your lifestyle.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Statistics Section -->
+<section class="stats-section">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <h2>5000+</h2>
+      <p>Students Trained</p>
+    </div>
+    <div class="stat-item">
+      <h2>25+</h2>
+      <p>Courses Offered</p>
+    </div>
+    <div class="stat-item">
+      <h2>95%</h2>
+      <p>Success Rate</p>
+    </div>
+    <div class="stat-item">
+      <h2>50+</h2>
+      <p>Industry Partners</p>
+    </div>
+  </div>
+</section>
+
+<!-- Call to Action Section -->
+<section class="cta-section">
+  <div class="container">
+    <h2>Ready to Start Your Tech Journey?</h2>
+    <p>Join thousands of successful learners who have transformed their careers with Sound Foundation Edtech Academy</p>
+    <button class="btn btn-lg btn-dark">Enroll Now</button>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-container">
+    <!-- About Section -->
+    <div class="footer-section">
+      <h3>About SFEA</h3>
+      <p>Sound Foundation Edtech Academy is a premier tech school dedicated to empowering students with in-demand tech skills and knowledge.</p>
+      <div style="display: flex; gap: 10px; margin-top: 15px;">
+        <a href="#" style="font-size: 18px;">f</a>
+        <a href="#" style="font-size: 18px;">𝕏</a>
+        <a href="#" style="font-size: 18px;">in</a>
+        <a href="#" style="font-size: 18px;">▶</a>
+      </div>
+    </div>
+
+    <!-- Courses Section -->
+    <div class="footer-section">
+      <h3>Our Courses</h3>
+      <ul>
+        <li><a href="#">Web Development</a></li>
+        <li><a href="#">Web Design (UI/UX)</a></li>
+        <li><a href="#">Data Analysis</a></li>
+        <li><a href="#">AI & Machine Learning</a></li>
+        <li><a href="#">Digital Marketing</a></li>
+      </ul>
+    </div>
+
+    <!-- Resources Section -->
+    <div class="footer-section">
+      <h3>Resources</h3>
+      <ul>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Documentation</a></li>
+        <li><a href="#">FAQs</a></li>
+        <li><a href="#">Community Forum</a></li>
+        <li><a href="#">Support</a></li>
+      </ul>
+    </div>
+
+    <!-- Legal Section -->
+    <div class="footer-section">
+      <h3>Legal</h3>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Sitemap</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Footer Bottom -->
+  <div class="footer-bottom">
+    <p>&copy; 2026 Sound Foundation Edtech Academy. All rights reserved. | Empowering Tech Learners Worldwide</p>
+  </div>
+</footer>
+{% endblock %}

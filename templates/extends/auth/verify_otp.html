@@ -1,0 +1,366 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Verify Email - Sound Foundation Edtech Academy{% endblock %}
+
+{% block extra_css %}
+<style>
+  .auth-wrapper {
+    min-height: calc(100vh - 70px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    padding: 20px;
+  }
+
+  .auth-container {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    padding: 40px;
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .otp-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+
+  .auth-header h2 {
+    color: var(--primary-dark-orange);
+    margin-bottom: 10px;
+    font-size: 1.8rem;
+  }
+
+  .auth-header p {
+    color: #666;
+    margin: 0 0 20px 0;
+    line-height: 1.5;
+  }
+
+  .otp-instruction {
+    background-color: #f5f5f5;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 25px;
+    color: #666;
+    font-size: 0.9rem;
+    border-left: 4px solid var(--primary-dark-orange);
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-dark);
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .otp-input-container {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .otp-input {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    border: 2px solid #e0e0e0;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+  }
+
+  .otp-input:focus {
+    outline: none;
+    border-color: var(--primary-dark-orange);
+    box-shadow: 0 0 0 3px rgba(210, 105, 30, 0.1);
+  }
+
+  .otp-single-input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 5px;
+    font-size: 1rem;
+    text-align: center;
+    letter-spacing: 2px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+  }
+
+  .otp-single-input:focus {
+    outline: none;
+    border-color: var(--primary-dark-orange);
+    box-shadow: 0 0 0 3px rgba(210, 105, 30, 0.1);
+  }
+
+  .submit-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--primary-dark-orange);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .submit-btn:hover {
+    background-color: var(--primary-orange);
+    box-shadow: 0 4px 12px rgba(210, 105, 30, 0.3);
+  }
+
+  .resend-otp {
+    text-align: center;
+    margin-top: 20px;
+    color: #666;
+  }
+
+  .resend-otp a {
+    color: var(--primary-dark-orange);
+    font-weight: 600;
+  }
+
+  .resend-otp a:hover {
+    color: var(--primary-orange);
+  }
+
+  .timer {
+    color: var(--primary-orange);
+    font-weight: 600;
+  }
+
+  .error-messages,
+  .success-messages,
+  .info-messages {
+    list-style: none;
+    margin-bottom: 20px;
+    padding: 0;
+  }
+
+  .error-messages li {
+    background-color: #ffebee;
+    color: #c62828;
+    padding: 10px 12px;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    border-left: 4px solid #c62828;
+  }
+
+  .success-messages li {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    padding: 10px 12px;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    border-left: 4px solid #2e7d32;
+  }
+
+  .info-messages li {
+    background-color: #e3f2fd;
+    color: #1976d2;
+    padding: 10px 12px;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    border-left: 4px solid #1976d2;
+  }
+
+  @media (max-width: 480px) {
+    .auth-container {
+      padding: 25px;
+    }
+
+    .auth-header h2 {
+      font-size: 1.5rem;
+    }
+
+    .otp-input {
+      width: 40px;
+      height: 40px;
+      font-size: 1rem;
+    }
+
+    .otp-icon {
+      font-size: 2rem;
+    }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="auth-wrapper">
+  <div class="auth-container">
+    <div class="otp-icon">✉️</div>
+
+    <div class="auth-header">
+      <h2>Verify Email Address</h2>
+      <p>We've sent a verification code to your email. Enter it below to complete your registration.</p>
+    </div>
+
+    <!-- Display Messages -->
+    {% if messages %}
+      <ul class="
+        {% if 'error' in messages.0.tags %}
+          error-messages
+        {% elif 'success' in messages.0.tags %}
+          success-messages
+        {% else %}
+          info-messages
+        {% endif %}
+      ">
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    <div class="otp-instruction">
+      📧 Check your email (including spam/junk folder) for a 6-digit code
+    </div>
+
+    <form method="POST" novalidate>
+      {% csrf_token %}
+
+      <!-- OTP Code -->
+      <div class="form-group">
+        <label for="otp">Enter Verification Code *</label>
+        <input 
+          type="text" 
+          id="otp"
+          name="otp" 
+          class="otp-single-input"
+          placeholder="000000"
+          maxlength="6"
+          pattern="[0-9]{6}"
+          inputmode="numeric"
+          required
+        >
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="submit-btn">Verify Email</button>
+    </form>
+
+    <div class="resend-otp">
+      <p style="margin: 0 0 10px 0; color: #666;">Didn't receive the code?</p>
+      <button id="resend-otp-btn" class="submit-btn" disabled style="width:auto; padding:8px 14px; font-size:0.95rem;">Resend Code</button>
+      <span style="margin:0 8px; color:#666;">or</span>
+      <a href="{% url 'login' %}">Back to Login</a>
+      <div id="ajax-message" style="margin-top:10px"></div>
+    </div>
+
+    <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #e0e0e0; color: #999; font-size: 0.85rem;">
+      <p style="margin: 0;">You can request a new code in <span class="timer">01:00</span></p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Auto-focus next input when 6 digits are entered
+  const otpInput = document.getElementById('otp');
+  
+  if (otpInput) {
+    otpInput.addEventListener('input', function() {
+      // Only allow digits
+      this.value = this.value.replace(/[^0-9]/g, '').slice(0, 6);
+    });
+
+    // Auto-submit when 6 digits are entered
+    otpInput.addEventListener('input', function() {
+      if (this.value.length === 6) {
+        // Optional: auto-submit the form
+        // this.form.submit();
+      }
+    });
+  }
+
+  // Resend OTP timer and AJAX
+  (function(){
+    const resendBtn = document.getElementById('resend-otp-btn');
+    const timerEl = document.querySelector('.timer');
+    const ajaxMsg = document.getElementById('ajax-message');
+    const RESEND_DELAY = 60; // seconds
+    let remaining = RESEND_DELAY;
+    let intervalId = null;
+
+    function getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+      return null;
+    }
+
+    function formatTime(s){
+      const mm = String(Math.floor(s/60)).padStart(2,'0');
+      const ss = String(s%60).padStart(2,'0');
+      return `${mm}:${ss}`;
+    }
+
+    function updateTimer(){
+      if (!timerEl) return;
+      timerEl.textContent = formatTime(remaining);
+      if (remaining <= 0){
+        clearInterval(intervalId);
+        resendBtn.disabled = false;
+        resendBtn.textContent = 'Resend Code';
+      }
+      remaining -= 1;
+    }
+
+    function startTimer(){
+      remaining = RESEND_DELAY;
+      resendBtn.disabled = true;
+      resendBtn.textContent = 'Resend available in';
+      updateTimer();
+      intervalId = setInterval(updateTimer, 1000);
+    }
+
+    // initial start
+    startTimer();
+
+    async function resendOtp(){
+      ajaxMsg.innerHTML = '';
+      const csrftoken = getCookie('csrftoken');
+      try{
+        const resp = await fetch("{% url 'resend_otp_api' %}", {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken
+          },
+          credentials: 'same-origin'
+        });
+        const data = await resp.json();
+        if (resp.ok){
+          ajaxMsg.innerHTML = `<div style="color:green;">${data.message || 'OTP resent successfully.'}</div>`;
+          startTimer();
+        } else {
+          ajaxMsg.innerHTML = `<div style="color:#c62828;">${data.error || 'Could not resend OTP.'}</div>`;
+        }
+      }catch(err){
+        ajaxMsg.innerHTML = `<div style="color:#c62828;">Network error. Please try again.</div>`;
+      }
+    }
+
+    if (resendBtn){
+      resendBtn.addEventListener('click', function(e){
+        if (resendBtn.disabled) return;
+        resendOtp();
+      });
+    }
+  })();
+</script>
+{% endblock %}

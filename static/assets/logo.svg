@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="95" fill="#1a1a1a" stroke="#d2691e" stroke-width="2"/>
+  
+  <!-- Main shape - Building/Foundation -->
+  <g transform="translate(100, 100)">
+    <!-- Foundation blocks -->
+    <rect x="-45" y="20" width="20" height="30" fill="#d2691e" rx="2"/>
+    <rect x="-15" y="20" width="20" height="30" fill="#d2691e" rx="2"/>
+    <rect x="15" y="20" width="20" height="30" fill="#d2691e" rx="2"/>
+    <rect x="45" y="20" width="20" height="30" fill="#d2691e" rx="2"/>
+    
+    <!-- Base connecting line -->
+    <line x1="-55" y1="50" x2="55" y2="50" stroke="#d2691e" stroke-width="3"/>
+    
+    <!-- Rising structure - bars representing growth/learning -->
+    <rect x="-35" y="-5" width="15" height="25" fill="#ff8c00" rx="2"/>
+    <rect x="-12" y="-25" width="15" height="45" fill="#ff8c00" rx="2"/>
+    <rect x="11" y="-40" width="15" height="60" fill="#ff8c00" rx="2"/>
+    <rect x="34" y="-25" width="15" height="45" fill="#ff8c00" rx="2"/>
+    
+    <!-- Center tech symbol - circuit pattern -->
+    <circle cx="0" cy="-15" r="8" fill="none" stroke="#ff8c00" stroke-width="2"/>
+    <line x1="-6" y1="-15" x2="6" y2="-15" stroke="#ff8c00" stroke-width="2"/>
+    <line x1="0" y1="-21" x2="0" y2="-9" stroke="#ff8c00" stroke-width="2"/>
+  </g>
+  
+  <!-- Text -->
+  <text x="100" y="175" text-anchor="middle" font-size="16" font-weight="bold" fill="#d2691e" font-family="Arial, sans-serif">
+    SFEA
+  </text>
+</svg>

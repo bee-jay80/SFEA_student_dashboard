@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Awaiting Approval - Sound Foundation Edtech Academy{% endblock %}
+
+{% block extra_css %}
+<style>
+  .awaiting-wrapper{min-height:calc(100vh - 70px);display:flex;align-items:center;justify-content:center;padding:30px;background:linear-gradient(135deg,#fff 0%,#fafafa 100%)}
+  .awaiting-card{max-width:760px;width:100%;background:#fff;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,0.08);padding:36px;text-align:center}
+  .awaiting-card h1{color:var(--primary-dark-orange);margin-bottom:8px}
+  .awaiting-card p{color:#444;line-height:1.6}
+  .awaiting-actions{margin-top:22px;display:flex;gap:12px;justify-content:center}
+  .btn-ghost{background:transparent;border:1px solid #ddd;padding:10px 18px;border-radius:8px;color:#333}
+  .btn-primary{background:var(--primary-dark-orange);color:#fff;border:none;padding:10px 18px;border-radius:8px}
+  @media(max-width:480px){.awaiting-card{padding:20px}}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="awaiting-wrapper">
+  <div class="awaiting-card">
+    <div style="font-size:48px;margin-bottom:12px;">⏳</div>
+    <h1>Your account is awaiting admin approval</h1>
+    <p>Thanks for verifying your email. Your account has been successfully verified and is now pending approval by an administrator.</p>
+    <p>You will receive a notification (email) once your account has been approved. Meanwhile, you may return to the homepage or sign in to check your account status.</p>
+
+    <div class="awaiting-actions">
+      <a class="btn-ghost" href="{% url 'home' %}">Back to Home</a>
+      <a class="btn-primary" href="{% url 'login' %}">Go to Login</a>
+    </div>
+
+    <div style="margin-top:18px;color:#777;font-size:0.95rem">If you do not receive approval within 48 hours, contact support via the Contact Us page.</div>
+  </div>
+</div>
+{% endblock %}
