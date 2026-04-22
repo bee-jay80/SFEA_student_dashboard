@@ -18,13 +18,13 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='CustomUser',
             fields=[
+                ('email', models.EmailField(max_length=254, unique=True)),
+                ('last_name', models.CharField(blank=True, max_length=30)),
+                ('first_name', models.CharField(blank=True, max_length=30)),
+                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
                 ('password', models.CharField(max_length=128, verbose_name='password')),
                 ('last_login', models.DateTimeField(blank=True, null=True, verbose_name='last login')),
                 ('is_superuser', models.BooleanField(default=False, help_text='Designates that this user has all permissions without explicitly assigning them.', verbose_name='superuser status')),
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('email', models.EmailField(max_length=254, unique=True)),
-                ('first_name', models.CharField(blank=True, max_length=30)),
-                ('last_name', models.CharField(blank=True, max_length=30)),
                 ('phone_number', models.CharField(blank=True, max_length=15)),
                 ('student_reg_no', models.CharField(max_length=20)),
                 ('is_active', models.BooleanField(default=False)),
